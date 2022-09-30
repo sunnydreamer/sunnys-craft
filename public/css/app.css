@@ -1,0 +1,303 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* log in modal */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  /* display: none; */
+  background-color: white;
+  margin: 2% auto;
+  width: 30%;
+  max-width: 430px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 0.6s;
+  /* border: SOLID BLACK; */
+  border-radius: 30px;
+  padding: 10px 30px 20px;
+}
+
+#login {
+  display: block;
+}
+
+#register {
+  display: none;
+}
+
+.signInBtn {
+  cursor: pointer;
+}
+.signinTitle {
+  padding: 20px;
+}
+
+.closeBtn {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+}
+
+.closeBtn:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.modal-body {
+  /* background-color: red; */
+  padding: 0 20px;
+}
+
+form .field {
+  height: 45px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.field input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border: 1px solid #cacaca;
+  padding: 0 15px;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.button-field {
+  cursor: pointer;
+}
+
+.button-field:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+.form-link {
+  margin-top: 15px;
+  font-size: 15px;
+  text-align: center;
+}
+.form-link a {
+  color: gray;
+}
+
+.form-link a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.line {
+  height: 1px;
+  background-color: lightgray;
+  margin: 35px 20px;
+}
+
+.line::before {
+  content: "or";
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: black;
+}
+
+.otherLoginBtns {
+  /* background-color: lightblue; */
+  padding: 0 20px;
+}
+
+.otherLoginBtn {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 15px;
+  /* background-color: aquamarine; */
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.google {
+  background-color: #ec5a4e;
+}
+
+.google:hover {
+  background-color: #c34a3f;
+}
+
+.facebook {
+  background-color: #3c5a99;
+}
+.facebook:hover {
+  background-color: #2d4575;
+}
+
+.apple {
+  background-color: #424242;
+}
+
+.apple:hover {
+  background-color: #000000;
+}
+
+.policy {
+  padding: 10px 20px;
+  font-size: 12px;
+  color: gray;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* header */
+.topBar {
+  /* background-color: green; */
+  padding: 20px 70px;
+  padding-left: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoImg {
+  width: 50px;
+}
+
+.brand {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.search {
+  /* background-color: yellow; */
+  width: 65%;
+  height: 50px;
+  display: flex;
+}
+
+.search-bar {
+  width: 100%;
+  /* background-color: gray; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid black 2px;
+  border-radius: 50px;
+  padding: 0 10px;
+  padding-left: 20px;
+  background-color: rgb(243, 243, 243);
+}
+
+.search-bar input {
+  width: 95%;
+  height: 70%;
+  background-color: transparent;
+  border: 0;
+  margin-right: 20px;
+  outline: none;
+  cursor: text;
+}
+
+.search-bar button {
+  border: 0;
+  border-radius: 100%;
+  background-color: rgb(221, 221, 221);
+}
+
+.search-bar button:hover {
+  border: 0;
+  border-radius: 100%;
+  background-color: rgb(194, 193, 193);
+}
+
+.searchIcon {
+  width: 28px;
+  margin: 3px;
+}
+
+.cartImg {
+  width: 40px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  background-color: #fff35e;
+}
+.navItem {
+  /* background-color: red; */
+  margin: 3px 30px;
+}
+
+/* products */
+
+.products {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.productCard {
+  width: 280px;
+  height: 290px;
+  /* background-color: green; */
+  margin: 10px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  border: gray solid 1.5px;
+}
+.productImgContainer {
+  height: 70%;
+  overflow: hidden;
+
+  /* background-color: green; */
+}
+
+.productImg {
+  height: 100%;
+  width: 100%;
+}
+
+.productName {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.productPrice {
+  font-size: 25px;
+}
+
+.productSeller {
+  font-size: 12px;
+  color: darkgray;
+}
