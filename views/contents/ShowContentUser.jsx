@@ -1,6 +1,6 @@
 const React = require("react");
 
-class ProductContentUser extends React.Component {
+class ShowContentUser extends React.Component {
   render() {
     return (
       <>
@@ -44,7 +44,7 @@ class ProductContentUser extends React.Component {
             <div className="showSeller">{this.props.seller}</div>
             <div className="showName">{this.props.name}</div>
             <div className="showPrice">${this.props.price}</div>
-            <form action="#" method="POST" class="submitBtn">
+            <form action="#" method="POST" className="submitBtn">
               <input id="addToCartBtn" type="submit" value="Add to Cart" />
             </form>
 
@@ -78,4 +78,4 @@ class ProductContentUser extends React.Component {
   }
 }
 
-module.exports = ProductContentUser;
+module.exports = ShowContentUser;

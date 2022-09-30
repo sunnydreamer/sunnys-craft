@@ -5,6 +5,7 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
 const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 
 const mongoose = require("mongoose");
 
@@ -66,18 +67,54 @@ app.get("/logout", (req, res) => {
 app.get("/jewelry", (req, res) => {
   Jewelry.find({}, (err, allJewelry) => {
     // console.log(err);
-    res.render("Products", { products: allJewelry });
+    if (app.locals.login === false) {
+      res.render("Products", { products: allJewelry, log: "false" });
+    } else {
+      if (app.locals.isAdmin === true) {
+        res.render("Products", {
+          products: allJewelry,
+          log: "true",
+          isAdmin: "Admin",
+        });
+      } else {
+        res.render("Products", {
+          products: allJewelry,
+          log: "true",
+          isAdmin: "User",
+        });
+      }
+    }
   });
 });
 
 app.get("/clothing", (req, res) => {
+  // Clothing.find({}, (err, allClothing) => {
+  //   // console.log(err);
+  //   res.render("Products", { products: allClothing });
+  // });
   Clothing.find({}, (err, allClothing) => {
     // console.log(err);
-    res.render("Products", { products: allClothing });
+    if (app.locals.login === false) {
+      res.render("Products", { products: allClothing, log: "false" });
+    } else {
+      if (app.locals.isAdmin === true) {
+        res.render("Products", {
+          products: allClothing,
+          log: "true",
+          isAdmin: "Admin",
+        });
+      } else {
+        res.render("Products", {
+          products: allClothing,
+          log: "true",
+          isAdmin: "User",
+        });
+      }
+    }
   });
 });
 
-// Jewerly show page
+// Products show page
 app.get("/:catagory/:id", (req, res) => {
   switch (req.params.catagory) {
     case "jewelry":
@@ -123,6 +160,65 @@ app.get("/:catagory/:id", (req, res) => {
         }
       });
 
+      break;
+  }
+});
+
+// delete
+app.delete("/:catagory/:id", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findByIdAndRemove(req.params.id, (err, data) => {
+        console.log(err);
+        res.redirect(`/${req.params.catagory}`);
+      });
+      break;
+    case "clothing":
+      Clothing.findByIdAndRemove(req.params.id, (err, data) => {
+        console.log(err);
+        res.redirect(`/${req.params.catagory}`);
+      });
+      break;
+  }
+});
+
+// edit
+
+app.get("/:catagory/:id/edit", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findById(req.params.id, (err, foundProduct) => {
+        console.log(err);
+        res.render("Edit", { isAdmin: "Admin", product: foundProduct });
+      });
+      break;
+    case "clothing":
+      Clothing.findByIdAndRemove(req.params.id, (err, data) => {
+        console.log(err);
+      });
+      break;
+  }
+});
+
+// put patch
+
+app.put("/:catagory/:id/", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        (err, updatedProduct) => {
+          console.log(updatedProduct);
+          res.redirect(`/${req.params.catagory}/${req.params.id}`);
+        }
+      );
+
+      break;
+    case "clothing":
+      Clothing.findByIdAndRemove(req.params.id, (err, data) => {
+        console.log(err);
+      });
       break;
   }
 });

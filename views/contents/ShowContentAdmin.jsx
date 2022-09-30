@@ -1,11 +1,19 @@
 const React = require("react");
 
-class ProductContentUser extends React.Component {
+class ShowContentUser extends React.Component {
   render() {
     return (
       <>
         <div className="showContent">
           <div className="showLeft">
+            <nav className="gobackBtn">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/32/32766.png"
+                alt=""
+                className="gobackIcon"
+              />
+              <a href={`/${this.props.category}`}>Go Back</a>
+            </nav>
             <div className="showImg">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/271/271220.png"
@@ -36,10 +44,17 @@ class ProductContentUser extends React.Component {
             <div className="showSeller">{this.props.seller}</div>
             <div className="showName">{this.props.name}</div>
             <div className="showPrice">${this.props.price}</div>
-            <form action="#" method="POST" class="submitBtn">
+            <form
+              action={`/${this.props.category}/${this.props.id}/edit`}
+              className="submitBtn"
+            >
               <input id="editBtn" type="submit" value="Edit" />
             </form>
-            <form action="#" method="POST" class="submitBtn">
+            <form
+              action={`/${this.props.category}/${this.props.id}?_method=DELETE`}
+              method="POST"
+              className="submitBtn"
+            >
               <input id="deleteBtn" type="submit" value="Delete" />
             </form>
 
@@ -73,4 +88,4 @@ class ProductContentUser extends React.Component {
   }
 }
 
-module.exports = ProductContentUser;
+module.exports = ShowContentUser;

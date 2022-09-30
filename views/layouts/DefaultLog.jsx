@@ -46,7 +46,7 @@ class TemplateLog extends React.Component {
                 </div>
                 <div className="cart">
                   <img
-                    src="http://www.pngplay.com/wp-content/uploads/1/Shopping-Cart-PNG-Royalty-Free-Photo.png"
+                    src="https://game-icons.net/icons/000000/transparent/1x1/delapouite/shopping-cart.png"
                     alt=""
                     className="cartImg"
                   />

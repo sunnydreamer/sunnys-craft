@@ -262,12 +262,19 @@ form .field {
 
 /* products */
 
+#backToHome {
+  /* background-color: red; */
+  margin-top: 50px;
+  margin-left: 200px;
+  margin-bottom: 0;
+}
+
 .products {
   /* background-color: red; */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin: 20px 100px;
 }
 
 .productCard {
@@ -332,8 +339,8 @@ form .field {
 
 .gobackBtn {
   /* background-color: red; */
-  width: 80%;
-  margin-bottom: 10px;
+  width: 70%;
+  margin-bottom: 30px;
 }
 
 .gobackIcon {
@@ -421,4 +428,53 @@ form .field {
 .descTitle {
   margin: 20px 0;
   font-weight: bold;
+}
+
+/* edit page */
+.editForm {
+  /* background-color: green; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputItem {
+  margin: 10px;
+  display: flex;
+  width: 60%;
+  height: 30px;
+}
+
+.inputName {
+  /* background-color: red; */
+  width: 20%;
+  margin-right: 20px;
+  text-align: end;
+
+  font-size: 20px;
+}
+
+.inputItem input {
+  background-color: white;
+  width: 60%;
+  border-radius: 5px;
+}
+
+.pageTitle {
+  font-size: 50px;
+  text-align: center;
+  /* background-color: pink; */
+}
+
+#editConfirm {
+  width: 15%;
+  margin: 20px;
+  margin-left: 30px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: green;
+  color: white;
+  border-radius: 30px;
+  border: none;
 }

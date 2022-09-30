@@ -1,39 +1,27 @@
 const React = require("react");
 const DefaultLayout = require("./layouts/Default");
+const DefaultLayoutLog = require("./layouts/DefaultLog");
+const ProductsContentUser = require("./contents/ProductsContentUser");
 
 class Products extends React.Component {
   render() {
     const { products } = this.props;
-    return (
-      <DefaultLayout title={"HiHI"}>
-        <div className="products">
-          {products.map((product, i) => {
-            return (
-              <>
-                {" "}
-                <div className="productCard" key={i}>
-                  <a href={`/${product.category}/${product._id}`}>
-                    <div className="productImgContainer">
-                      <img src={product.img} alt="" className="productImg" />
-                    </div>
+    const { log } = this.props;
+    const { isAdmin } = this.props;
 
-                    <div className="productName">{product.name}</div>
-                    <div className="productPrice">${product.price}</div>
-                    <div className="productSeller">
-                      Sell by {product.seller}
-                    </div>
-                  </a>
-                </div>
-              </>
-            );
-          })}
-        </div>
-
-        {/* {jewery.map((jewery, i) => {
-          return <h1>{jewery.name}</h1>;
-        })} */}
-      </DefaultLayout>
-    );
+    if (log === "false") {
+      return (
+        <DefaultLayout title={"HiHI"}>
+          <ProductsContentUser products={products}></ProductsContentUser>
+        </DefaultLayout>
+      );
+    } else {
+      return (
+        <DefaultLayoutLog title={"HiHI"} isAdmin={isAdmin}>
+          <ProductsContentUser products={products}></ProductsContentUser>
+        </DefaultLayoutLog>
+      );
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 const React = require("react");
 const DefaultLayout = require("./layouts/Default");
-const ProductContentUser = require("./contents/ProductContentUser");
-const ProductContentAdmin = require("./contents/ProductContentAdmin");
+const ProductContentUser = require("./contents/ShowContentUser");
+const ProductContentAdmin = require("./contents/ShowContentAdmin");
 const DefaultLayoutLog = require("./layouts/DefaultLog");
 
 class Show extends React.Component {
@@ -31,6 +31,7 @@ class Show extends React.Component {
               name={product.name}
               price={product.price}
               img={product.img}
+              category={product.category}
             ></ProductContentUser>
           </DefaultLayoutLog>
         );
@@ -43,6 +44,8 @@ class Show extends React.Component {
               name={product.name}
               price={product.price}
               img={product.img}
+              category={product.category}
+              id={product._id}
             ></ProductContentAdmin>
           </DefaultLayoutLog>
         );
