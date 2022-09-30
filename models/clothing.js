@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const jewelrySchema = new mongoose.Schema(
+const clothingSchema = new mongoose.Schema(
   {
     name: { type: String, require: true },
     price: { type: Number, require: true },
@@ -14,10 +14,10 @@ const jewelrySchema = new mongoose.Schema(
     },
     description: { type: String, require: true },
     //   Comments: { type: [], default:  },
-    category: { type: String, default: "jewelry" },
+    category: { type: String, default: "clothing" },
   },
   { timestamps: true }
 );
 
-const Jewelry = mongoose.model("Jewelry", jewelrySchema);
-module.exports = Jewelry;
+const Clothing = mongoose.model("Clothing", clothingSchema);
+module.exports = Clothing;

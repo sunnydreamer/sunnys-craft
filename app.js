@@ -11,7 +11,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 // import database
-const Jewery = require("./models/jewelry");
+const Jewelry = require("./models/jewelry");
+const Clothing = require("./models/clothing");
 const User = require("./models/user");
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -25,6 +26,7 @@ mongoose.connection.once("open", () => {
 // set up app local
 app.locals.login = false;
 app.locals.email = "";
+app.isAdmin = false;
 
 // middle ware
 
@@ -46,7 +48,11 @@ app.get("/", (req, res) => {
   if (app.locals.login === false) {
     res.render("Index", { log: "false" });
   } else {
-    res.render("Index", { log: "true" });
+    if (app.locals.isAdmin === true) {
+      res.render("Index", { log: "true", isAdmin: "Admin" });
+    } else {
+      res.render("Index", { log: "true", isAdmin: "User" });
+    }
   }
 });
 
@@ -57,15 +63,68 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/jewery&accessories", (req, res) => {
-  Jewery.find({}, (err, allJewery) => {
+app.get("/jewelry", (req, res) => {
+  Jewelry.find({}, (err, allJewelry) => {
     // console.log(err);
-    res.render("Products", { jewery: allJewery });
+    res.render("Products", { products: allJewelry });
   });
 });
 
-app.get("/clothing&shoes", (req, res) => {
-  res.render("Products");
+app.get("/clothing", (req, res) => {
+  Clothing.find({}, (err, allClothing) => {
+    // console.log(err);
+    res.render("Products", { products: allClothing });
+  });
+});
+
+// Jewerly show page
+app.get("/:catagory/:id", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findById(req.params.id, (err, foundProduct) => {
+        if (app.locals.login === false) {
+          res.render("Show", { product: foundProduct, log: "false" });
+        } else {
+          if (app.locals.isAdmin === true) {
+            res.render("Show", {
+              product: foundProduct,
+              log: "true",
+              isAdmin: "Admin",
+            });
+          } else {
+            res.render("Show", {
+              product: foundProduct,
+              log: "true",
+              isAdmin: "User",
+            });
+          }
+        }
+      });
+
+      break;
+    case "clothing":
+      Clothing.findById(req.params.id, (err, foundProduct) => {
+        if (app.locals.login === false) {
+          res.render("Show", { product: foundProduct, log: "false" });
+        } else {
+          if (app.locals.isAdmin === true) {
+            res.render("Show", {
+              product: foundProduct,
+              log: "true",
+              isAdmin: "Admin",
+            });
+          } else {
+            res.render("Show", {
+              product: foundProduct,
+              log: "true",
+              isAdmin: "User",
+            });
+          }
+        }
+      });
+
+      break;
+  }
 });
 
 //===================================================== User Routes============================================
@@ -89,10 +148,11 @@ app.post("/user/login", (req, res) => {
       },
     ],
     (err, foundData) => {
-      // console.log(foundData[0].email);
       app.locals.login = true;
       app.locals.email = foundData[0].email;
-      res.redirect(`/`);
+      app.locals.isAdmin = foundData[0].isAdmin;
+
+      res.redirect("/");
     }
   );
 
@@ -111,7 +171,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/seed", (req, res) => {
-  Jewery.create([
+  Jewelry.create([
     {
       name: "Wide Stainless Steel Chain",
       price: 15.99,
@@ -135,6 +195,32 @@ app.get("/seed", (req, res) => {
       price: 34.9,
       seller: "LeatherPage",
       img: "https://i.etsystatic.com/22295846/r/il/24cc02/2359697365/il_794xN.2359697365_kksq.jpg",
+    },
+  ]);
+  Clothing.create([
+    {
+      name: "baby girl romper",
+      price: 38.99,
+      seller: "LoveJax",
+      img: "https://i.etsystatic.com/11390758/r/il/90e1c8/2606462290/il_794xN.2606462290_sx2i.jpg",
+    },
+    {
+      name: "Fragkosiko Cotton Tote Bag ",
+      price: 26.0,
+      seller: "Egg Project",
+      img: "https://i.etsystatic.com/12035891/r/il/f1099f/2306082656/il_794xN.2306082656_ga03.jpg",
+    },
+    {
+      name: "Funny Cosmetic Make Up Bag",
+      price: 19.75,
+      seller: "JoyfulStore",
+      img: "https://i.etsystatic.com/8533852/r/il/ab74ef/1162202616/il_794xN.1162202616_l69u.jpg",
+    },
+    {
+      name: "Ghost Malone Shirt",
+      price: 15.52,
+      seller: "TEE",
+      img: "https://i.etsystatic.com/34151806/r/il/87f58f/4165798026/il_794xN.4165798026_t9pj.jpg",
     },
   ]);
   res.redirect("/");

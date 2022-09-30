@@ -1,11 +1,12 @@
 const React = require("react");
 const DefaultLayout = require("./layouts/Default");
-const DefaultLayoutLog = require("./layouts/DefaultLogged");
+const DefaultLayoutLog = require("./layouts/DefaultLog");
 const IndexContent = require("./contents/IndexContent");
 
 class Index extends React.Component {
   render() {
     const { log } = this.props;
+    const { isAdmin } = this.props;
     console.log(log);
     if (log === "false") {
       return (
@@ -15,7 +16,7 @@ class Index extends React.Component {
       );
     } else {
       return (
-        <DefaultLayoutLog title={"home"}>
+        <DefaultLayoutLog title={"home"} isAdmin={isAdmin}>
           <IndexContent></IndexContent>
         </DefaultLayoutLog>
       );

@@ -178,10 +178,10 @@ class Template extends React.Component {
 
               <nav className="nav">
                 <div className="navItem">
-                  <a href="/jewery&accessories">Jewery & Accessories</a>
+                  <a href="/jewelry">Jewelry & Accessories</a>
                 </div>
                 <div className="navItem">
-                  <a href="/clothing&shoes">Clothing & Shoes</a>
+                  <a href="/clothing">Clothing & Shoes</a>
                 </div>
                 <div className="navItem">Home & Living</div>
                 <div className="navItem">Wedding & Party</div>

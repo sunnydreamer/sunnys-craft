@@ -41,6 +41,7 @@ class TemplateLog extends React.Component {
                   </form>
                 </div>
                 <div className="signInBtn">
+                  <div className="greeting">Hello {this.props.isAdmin}</div>
                   <a href="/logout">Log out</a>{" "}
                 </div>
                 <div className="cart">
@@ -54,10 +55,10 @@ class TemplateLog extends React.Component {
 
               <nav className="nav">
                 <div className="navItem">
-                  <a href="/jewery&accessories">Jewery & Accessories</a>
+                  <a href="/jewelry">Jewelry & Accessories</a>
                 </div>
                 <div className="navItem">
-                  <a href="/clothing&shoes">Clothing & Shoes</a>
+                  <a href="/clothing">Clothing & Shoes</a>
                 </div>
                 <div className="navItem">Home & Living</div>
                 <div className="navItem">Wedding & Party</div>

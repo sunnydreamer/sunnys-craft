@@ -48,6 +48,7 @@ a {
 
 .signInBtn {
   cursor: pointer;
+  text-align: center;
 }
 .signinTitle {
   padding: 20px;
@@ -241,6 +242,10 @@ form .field {
   margin: 3px;
 }
 
+.greeting {
+  font-weight: bold;
+}
+
 .cartImg {
   width: 40px;
 }
@@ -300,4 +305,120 @@ form .field {
 .productSeller {
   font-size: 12px;
   color: darkgray;
+}
+
+/* Show page */
+
+.showContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.showLeft {
+  /* background-color: red; */
+  width: 60%;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.showRight {
+  /* background-color: pink; */
+  width: 40%;
+  padding-right: 40px;
+}
+
+.gobackBtn {
+  /* background-color: red; */
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.gobackIcon {
+  width: 10px;
+  margin-right: 10px;
+}
+
+.showImg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  /* background-color: pink; */
+  width: 100%;
+}
+
+.showArrowLeft {
+  height: 20px;
+  margin: 10px;
+}
+
+.showArrowRight {
+  height: 20px;
+  margin: 10px;
+}
+
+.mainPicContainer {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+}
+.showImgLink {
+  height: 100%;
+  border-radius: 20px;
+}
+
+.showName {
+  margin: 10px 0;
+  font-size: 25px;
+}
+
+.showPrice {
+  font-size: 35px;
+  font-weight: bold;
+}
+.submitBtn {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#addToCartBtn {
+  width: 80%;
+  padding: 10px;
+  font-size: 20px;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+}
+
+#editBtn {
+  width: 80%;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 30px;
+  border: none;
+}
+
+#deleteBtn {
+  width: 80%;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #e1313a;
+
+  border-radius: 30px;
+  border: none;
+  color: white;
+}
+
+.descTitle {
+  margin: 20px 0;
+  font-weight: bold;
 }

@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     default:
       "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3-1536x1536.png",
   },
+  isAdmin: { type: Boolean, default: false },
 });
 
 const User = mongoose.model("User", userSchema);
