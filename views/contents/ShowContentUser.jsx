@@ -44,7 +44,11 @@ class ShowContentUser extends React.Component {
             <div className="showSeller">{this.props.seller}</div>
             <div className="showName">{this.props.name}</div>
             <div className="showPrice">${this.props.price}</div>
-            <form action="#" method="POST" className="submitBtn">
+            <form
+              action={`/${this.props.category}/${this.props.id}`}
+              method="POST"
+              className="submitBtn"
+            >
               <input id="addToCartBtn" type="submit" value="Add to Cart" />
             </form>
 

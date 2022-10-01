@@ -32,8 +32,8 @@ app.isAdmin = false;
 // middle ware
 
 app.use((req, res, next) => {
-  // console.log(app.locals.login);
-  // console.log(app.locals.email);
+  // res.locals.success = req.flash("success");
+  // res.locals.errors = req.flash("error");
   next();
 });
 
@@ -41,18 +41,22 @@ app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: false }));
 
+// Set up shopping cart
+
+const cart = [];
+
 // ==================================Routes==================================================
 
 // Home Page
 app.get("/", (req, res) => {
   console.log(app.locals.login);
   if (app.locals.login === false) {
-    res.render("Index", { log: "false" });
+    res.render("Index", { log: "false", cart: cart.length });
   } else {
     if (app.locals.isAdmin === true) {
-      res.render("Index", { log: "true", isAdmin: "Admin" });
+      res.render("Index", { log: "true", isAdmin: "Admin", cart: cart.length });
     } else {
-      res.render("Index", { log: "true", isAdmin: "User" });
+      res.render("Index", { log: "true", isAdmin: "User", cart: cart.length });
     }
   }
 });
@@ -68,19 +72,28 @@ app.get("/jewelry", (req, res) => {
   Jewelry.find({}, (err, allJewelry) => {
     // console.log(err);
     if (app.locals.login === false) {
-      res.render("Products", { products: allJewelry, log: "false" });
+      res.render("Products", {
+        products: allJewelry,
+        log: "false",
+        title: "Jewelry & Accessories",
+        cart: cart.length,
+      });
     } else {
       if (app.locals.isAdmin === true) {
         res.render("Products", {
           products: allJewelry,
           log: "true",
           isAdmin: "Admin",
+          title: "Jewelry & Accessories",
+          cart: cart.length,
         });
       } else {
         res.render("Products", {
           products: allJewelry,
           log: "true",
           isAdmin: "User",
+          title: "Jewelry & Accessories",
+          cart: cart.length,
         });
       }
     }
@@ -95,23 +108,58 @@ app.get("/clothing", (req, res) => {
   Clothing.find({}, (err, allClothing) => {
     // console.log(err);
     if (app.locals.login === false) {
-      res.render("Products", { products: allClothing, log: "false" });
+      res.render("Products", {
+        products: allClothing,
+        log: "false",
+        title: "Clothing & Shoes",
+        cart: cart.length,
+      });
     } else {
       if (app.locals.isAdmin === true) {
         res.render("Products", {
           products: allClothing,
           log: "true",
           isAdmin: "Admin",
+          title: "Clothing & Shoes",
+          cart: cart.length,
         });
       } else {
         res.render("Products", {
           products: allClothing,
           log: "true",
           isAdmin: "User",
+          title: "Clothing & Shoes",
+          cart: cart.length,
         });
       }
     }
   });
+});
+
+// New Route
+app.get("/:catagory/new", (req, res) => {
+  res.render("New", { catagory: req.params.catagory, cart: cart.length });
+});
+
+app.post("/:catagory/new", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.create(req.body, (err, createdProduct) => {
+        console.log(err);
+        console.log("Just Added : ", createdProduct);
+      });
+
+      res.redirect(`/${req.params.catagory}`);
+
+      break;
+    case "clothing":
+      Clothing.create(req.body, (err, createdProduct) => {
+        console.log(err);
+        console.log("Just Added : ", createdProduct);
+      });
+      res.redirect(`/${req.params.catagory}`);
+      break;
+  }
 });
 
 // Products show page
@@ -120,19 +168,25 @@ app.get("/:catagory/:id", (req, res) => {
     case "jewelry":
       Jewelry.findById(req.params.id, (err, foundProduct) => {
         if (app.locals.login === false) {
-          res.render("Show", { product: foundProduct, log: "false" });
+          res.render("Show", {
+            product: foundProduct,
+            log: "false",
+            cart: cart.length,
+          });
         } else {
           if (app.locals.isAdmin === true) {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "Admin",
+              cart: cart.length,
             });
           } else {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "User",
+              cart: cart.length,
             });
           }
         }
@@ -142,19 +196,25 @@ app.get("/:catagory/:id", (req, res) => {
     case "clothing":
       Clothing.findById(req.params.id, (err, foundProduct) => {
         if (app.locals.login === false) {
-          res.render("Show", { product: foundProduct, log: "false" });
+          res.render("Show", {
+            product: foundProduct,
+            log: "false",
+            cart: cart.length,
+          });
         } else {
           if (app.locals.isAdmin === true) {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "Admin",
+              cart: cart.length,
             });
           } else {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "User",
+              cart: cart.length,
             });
           }
         }
@@ -189,7 +249,11 @@ app.get("/:catagory/:id/edit", (req, res) => {
     case "jewelry":
       Jewelry.findById(req.params.id, (err, foundProduct) => {
         console.log(err);
-        res.render("Edit", { isAdmin: "Admin", product: foundProduct });
+        res.render("Edit", {
+          isAdmin: "Admin",
+          product: foundProduct,
+          cart: cart.length,
+        });
       });
       break;
     case "clothing":
@@ -223,17 +287,58 @@ app.put("/:catagory/:id/", (req, res) => {
   }
 });
 
+// Add to cart
+
+app.post("/:catagory/:id/", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findById(req.params.id, (err, foundProduct) => {
+        cart.push(foundProduct);
+        console.log("cart's length is" + cart.length);
+        console.log("=====================================================");
+        console.log(cart);
+        res.redirect(`/${req.params.catagory}/${req.params.id}`);
+      });
+      break;
+    case "clothing":
+      Clothing.findById(req.params.id, (err, foundProduct) => {
+        cart.push(foundProduct);
+        console.log("cart's length is" + cart.length);
+        console.log("=====================================================");
+        console.log(cart);
+        res.redirect(`/${req.params.catagory}/${req.params.id}`);
+      });
+      break;
+  }
+});
+
 //===================================================== User Routes============================================
 
 app.post("/user/create", (req, res) => {
-  User.create(req.body, (err, createdUser) => {
-    // console.log(err);
-    console.log("Just added: ", createdUser);
-  });
-  res.redirect("/");
+  User.aggregate(
+    [
+      {
+        $match: {
+          $and: [{ email: req.body.email }],
+        },
+      },
+    ],
+    (err, foundData) => {
+      if (foundData.length === 0) {
+        User.create(req.body, (err, createdUser) => {
+          console.log("Just added: ", createdUser);
+        });
+        res.redirect("/");
+      } else {
+        // todo
+        console.log("existing user");
+      }
+    }
+  );
 });
 
 //log in Routes
+
 app.post("/user/login", (req, res) => {
   User.aggregate(
     [
@@ -244,20 +349,18 @@ app.post("/user/login", (req, res) => {
       },
     ],
     (err, foundData) => {
-      app.locals.login = true;
-      app.locals.email = foundData[0].email;
-      app.locals.isAdmin = foundData[0].isAdmin;
+      if (foundData.length === 0) {
+        //todo
+        console.log("Wrong User Name or Password");
+      } else {
+        app.locals.login = true;
+        app.locals.email = foundData[0].email;
+        app.locals.isAdmin = foundData[0].isAdmin;
 
-      res.redirect("/");
+        res.redirect("/");
+      }
     }
   );
-
-  // console.log(found);
-  // if (found) {
-  //   console.log("found");
-  // } else {
-  //   console.log("not found");
-  // }
 });
 
 app.use((req, res, next) => {

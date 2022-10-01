@@ -6,7 +6,7 @@ class Template extends React.Component {
       <>
         <html>
           <head>
-            <title></title>
+            <title>{this.props.title}</title>
             <link rel="stylesheet" href="/css/app.css" />
             <script src="/js/index.js" defer></script>
           </head>
@@ -23,10 +23,11 @@ class Template extends React.Component {
                   <form action="/user/login" method="POST">
                     <div className="field input-field">
                       <input
-                        type="text"
+                        type="email"
                         name="email"
                         placeholder="Email"
                         required
+                        onInvalid="InvalidMsg(this);"
                       />
                     </div>
                     <div className="field input-field">
@@ -85,10 +86,12 @@ class Template extends React.Component {
                   <form action="/user/create" method="POST">
                     <div className="field input-field">
                       <input
-                        type="text"
+                        type="email"
                         name="email"
                         placeholder="Email"
                         required
+                        onInvalid="InvalidMsg(this);"
+                        autoComplete="off"
                       />
                     </div>
                     <div className="field input-field">
@@ -97,6 +100,7 @@ class Template extends React.Component {
                         name="password"
                         placeholder="Password"
                         required
+                        autoComplete="off"
                       />
                     </div>
 
@@ -173,6 +177,7 @@ class Template extends React.Component {
                     alt=""
                     className="cartImg"
                   />
+                  <div className="cartNum">({this.props.cart})</div>
                 </div>
               </div>
 

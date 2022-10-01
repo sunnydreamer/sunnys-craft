@@ -7,16 +7,17 @@ class Index extends React.Component {
   render() {
     const { log } = this.props;
     const { isAdmin } = this.props;
+    const { cart } = this.props;
     console.log(log);
     if (log === "false") {
       return (
-        <DefaultLayout title={"home"}>
+        <DefaultLayout title={"Sunny's Craft"} cart={cart}>
           <IndexContent></IndexContent>
         </DefaultLayout>
       );
     } else {
       return (
-        <DefaultLayoutLog title={"home"} isAdmin={isAdmin}>
+        <DefaultLayoutLog title={"Sunny's Craft"} isAdmin={isAdmin} cart={cart}>
           <IndexContent></IndexContent>
         </DefaultLayoutLog>
       );

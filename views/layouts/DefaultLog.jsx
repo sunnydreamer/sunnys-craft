@@ -6,7 +6,7 @@ class TemplateLog extends React.Component {
       <>
         <html>
           <head>
-            <title></title>
+            <title>{this.props.title}</title>
             <link rel="stylesheet" href="/css/app.css" />
             <script src="/js/index.js" defer></script>
           </head>
@@ -50,6 +50,7 @@ class TemplateLog extends React.Component {
                     alt=""
                     className="cartImg"
                   />
+                  <div className="cartNum">({this.props.cart})</div>
                 </div>
               </div>
 

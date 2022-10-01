@@ -48,3 +48,14 @@ function registerModal() {
   login.style.display = "none";
   register.style.display = "block";
 }
+
+// check validation
+
+function InvalidMsg(textbox) {
+  if (textbox.validity.typeMismatch) {
+    textbox.setCustomValidity("please enter a valid email address");
+  } else {
+    textbox.setCustomValidity("");
+  }
+  return true;
+}
