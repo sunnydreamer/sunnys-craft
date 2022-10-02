@@ -31,7 +31,9 @@ class CartContent extends React.Component {
 
                         <div className="cartBtns">
                           <div className="cartBtn">Save for later</div>
-                          <div className="cartBtn">Remove</div>
+                          <div className="cartBtn">
+                            <a href={`/cart/${product._id}/remove`}>Remove</a>{" "}
+                          </div>
                         </div>
 
                         <textarea

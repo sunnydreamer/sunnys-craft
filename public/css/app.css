@@ -258,6 +258,7 @@ form .field {
   border: 0;
   border-radius: 100%;
   background-color: rgb(194, 193, 193);
+  cursor: pointer;
 }
 
 .searchIcon {
@@ -297,10 +298,17 @@ form .field {
   display: flex;
   justify-content: center;
   background-color: #fff35e;
+  padding: 10px;
 }
 .navItem {
   /* background-color: red; */
   margin: 3px 30px;
+  height: 25px;
+}
+
+.navItem:hover {
+  /* background-color: red; */
+  border-bottom: solid black 2px;
 }
 
 /* products */
@@ -353,8 +361,13 @@ form .field {
   text-align: center;
   padding: 15px;
   border-radius: 10px;
-  border: gray solid 1.5px;
+  border: rgb(216, 216, 216) solid 1.5px;
 }
+
+.productCard:hover {
+  background-color: #fff67f;
+}
+
 .productImgContainer {
   height: 70%;
   overflow: hidden;
@@ -409,6 +422,9 @@ form .field {
   /* background-color: red; */
   width: 70%;
   margin-bottom: 30px;
+}
+.gobackBtn:hover {
+  text-decoration: underline;
 }
 
 .gobackIcon {
@@ -724,4 +740,33 @@ form .field {
   margin-top: 10px;
   text-align: center;
   color: gray;
+}
+
+/* landing page */
+
+.landingPage {
+  width: 100%;
+  height: 80vh;
+  min-height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+#landingImg {
+  width: 100%;
+}
+
+.textOver {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 400px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  text-align: center;
 }

@@ -42,8 +42,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 // Set up shopping cart
-
-const cart = [];
+let cart = [];
 let totalPrice = 0;
 
 // ==================================Routes==================================================
@@ -346,23 +345,29 @@ app.post("/:catagory/:id/", (req, res) => {
     case "jewelry":
       Jewelry.findById(req.params.id, (err, foundProduct) => {
         cart.push(foundProduct);
-        totalPrice += parseFloat(foundProduct.price);
-        console.log(totalPrice);
         res.redirect(`/${req.params.catagory}/${req.params.id}`);
       });
       break;
     case "clothing":
       Clothing.findById(req.params.id, (err, foundProduct) => {
         cart.push(foundProduct);
-        totalPrice += parseFloat(foundProduct.price);
-        console.log(totalPrice);
         res.redirect(`/${req.params.catagory}/${req.params.id}`);
       });
       break;
   }
 });
 
+app.get("/cart/:id/remove", (req, res) => {
+  cart = cart.filter((item) => item._id.toString() !== req.params.id);
+  res.redirect("/cart");
+  // console.log(cart[0]._id.toString() === req.params.id);
+});
+
 app.get("/cart", (req, res) => {
+  totalPrice = 0;
+  cart.forEach((item) => {
+    totalPrice += item.price;
+  });
   if (app.locals.login === false) {
     res.render("Cart", { log: "false", cart: cart, totalPrice: totalPrice });
   } else {
@@ -378,7 +383,7 @@ app.get("/cart", (req, res) => {
         log: "true",
         isAdmin: "User",
         cart: cart,
-        totalPrice: totalPrice,
+        totalPrice: totalPrice.toFixed(2),
       });
     }
   }
