@@ -171,14 +171,16 @@ class Template extends React.Component {
                 <div className="signInBtn">
                   <a>Sign in</a>{" "}
                 </div>
-                <div className="cart">
-                  <img
-                    src="https://game-icons.net/icons/000000/transparent/1x1/delapouite/shopping-cart.png"
-                    alt=""
-                    className="cartImg"
-                  />
-                  <div className="cartNum">({this.props.cart})</div>
-                </div>
+                <a href="/cart">
+                  <div className="cart">
+                    <img
+                      src="https://game-icons.net/icons/000000/transparent/1x1/delapouite/shopping-cart.png"
+                      alt=""
+                      className="cartImg"
+                    />
+                    <div className="cartNum">({this.props.cart})</div>
+                  </div>
+                </a>
               </div>
 
               <nav className="nav">

@@ -11,13 +11,17 @@ class Index extends React.Component {
     console.log(log);
     if (log === "false") {
       return (
-        <DefaultLayout title={"Sunny's Craft"} cart={cart}>
+        <DefaultLayout title={"Sunny's Craft"} cart={cart.length}>
           <IndexContent></IndexContent>
         </DefaultLayout>
       );
     } else {
       return (
-        <DefaultLayoutLog title={"Sunny's Craft"} isAdmin={isAdmin} cart={cart}>
+        <DefaultLayoutLog
+          title={"Sunny's Craft"}
+          isAdmin={isAdmin}
+          cart={cart.length}
+        >
           <IndexContent></IndexContent>
         </DefaultLayoutLog>
       );

@@ -44,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 // Set up shopping cart
 
 const cart = [];
+let totalPrice = 0;
 
 // ==================================Routes==================================================
 
@@ -51,12 +52,12 @@ const cart = [];
 app.get("/", (req, res) => {
   console.log(app.locals.login);
   if (app.locals.login === false) {
-    res.render("Index", { log: "false", cart: cart.length });
+    res.render("Index", { log: "false", cart: cart });
   } else {
     if (app.locals.isAdmin === true) {
-      res.render("Index", { log: "true", isAdmin: "Admin", cart: cart.length });
+      res.render("Index", { log: "true", isAdmin: "Admin", cart: cart });
     } else {
-      res.render("Index", { log: "true", isAdmin: "User", cart: cart.length });
+      res.render("Index", { log: "true", isAdmin: "User", cart: cart });
     }
   }
 });
@@ -76,7 +77,7 @@ app.get("/jewelry", (req, res) => {
         products: allJewelry,
         log: "false",
         title: "Jewelry & Accessories",
-        cart: cart.length,
+        cart: cart,
       });
     } else {
       if (app.locals.isAdmin === true) {
@@ -85,7 +86,7 @@ app.get("/jewelry", (req, res) => {
           log: "true",
           isAdmin: "Admin",
           title: "Jewelry & Accessories",
-          cart: cart.length,
+          cart: cart,
         });
       } else {
         res.render("Products", {
@@ -93,7 +94,7 @@ app.get("/jewelry", (req, res) => {
           log: "true",
           isAdmin: "User",
           title: "Jewelry & Accessories",
-          cart: cart.length,
+          cart: cart,
         });
       }
     }
@@ -112,7 +113,7 @@ app.get("/clothing", (req, res) => {
         products: allClothing,
         log: "false",
         title: "Clothing & Shoes",
-        cart: cart.length,
+        cart: cart,
       });
     } else {
       if (app.locals.isAdmin === true) {
@@ -121,7 +122,7 @@ app.get("/clothing", (req, res) => {
           log: "true",
           isAdmin: "Admin",
           title: "Clothing & Shoes",
-          cart: cart.length,
+          cart: cart,
         });
       } else {
         res.render("Products", {
@@ -129,7 +130,7 @@ app.get("/clothing", (req, res) => {
           log: "true",
           isAdmin: "User",
           title: "Clothing & Shoes",
-          cart: cart.length,
+          cart: cart,
         });
       }
     }
@@ -138,7 +139,7 @@ app.get("/clothing", (req, res) => {
 
 // New Route
 app.get("/:catagory/new", (req, res) => {
-  res.render("New", { catagory: req.params.catagory, cart: cart.length });
+  res.render("New", { catagory: req.params.catagory, cart: cart });
 });
 
 app.post("/:catagory/new", (req, res) => {
@@ -171,7 +172,7 @@ app.get("/:catagory/:id", (req, res) => {
           res.render("Show", {
             product: foundProduct,
             log: "false",
-            cart: cart.length,
+            cart: cart,
           });
         } else {
           if (app.locals.isAdmin === true) {
@@ -179,14 +180,14 @@ app.get("/:catagory/:id", (req, res) => {
               product: foundProduct,
               log: "true",
               isAdmin: "Admin",
-              cart: cart.length,
+              cart: cart,
             });
           } else {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "User",
-              cart: cart.length,
+              cart: cart,
             });
           }
         }
@@ -199,7 +200,7 @@ app.get("/:catagory/:id", (req, res) => {
           res.render("Show", {
             product: foundProduct,
             log: "false",
-            cart: cart.length,
+            cart: cart,
           });
         } else {
           if (app.locals.isAdmin === true) {
@@ -207,14 +208,14 @@ app.get("/:catagory/:id", (req, res) => {
               product: foundProduct,
               log: "true",
               isAdmin: "Admin",
-              cart: cart.length,
+              cart: cart,
             });
           } else {
             res.render("Show", {
               product: foundProduct,
               log: "true",
               isAdmin: "User",
-              cart: cart.length,
+              cart: cart,
             });
           }
         }
@@ -252,7 +253,7 @@ app.get("/:catagory/:id/edit", (req, res) => {
         res.render("Edit", {
           isAdmin: "Admin",
           product: foundProduct,
-          cart: cart.length,
+          cart: cart,
         });
       });
       break;
@@ -282,31 +283,6 @@ app.put("/:catagory/:id/", (req, res) => {
     case "clothing":
       Clothing.findByIdAndRemove(req.params.id, (err, data) => {
         console.log(err);
-      });
-      break;
-  }
-});
-
-// Add to cart
-
-app.post("/:catagory/:id/", (req, res) => {
-  switch (req.params.catagory) {
-    case "jewelry":
-      Jewelry.findById(req.params.id, (err, foundProduct) => {
-        cart.push(foundProduct);
-        console.log("cart's length is" + cart.length);
-        console.log("=====================================================");
-        console.log(cart);
-        res.redirect(`/${req.params.catagory}/${req.params.id}`);
-      });
-      break;
-    case "clothing":
-      Clothing.findById(req.params.id, (err, foundProduct) => {
-        cart.push(foundProduct);
-        console.log("cart's length is" + cart.length);
-        console.log("=====================================================");
-        console.log(cart);
-        res.redirect(`/${req.params.catagory}/${req.params.id}`);
       });
       break;
   }
@@ -363,10 +339,49 @@ app.post("/user/login", (req, res) => {
   );
 });
 
-app.use((req, res, next) => {
-  console.log(app.locals.login);
-  console.log(app.locals.email);
-  next();
+// =================================================Cart============================
+
+app.post("/:catagory/:id/", (req, res) => {
+  switch (req.params.catagory) {
+    case "jewelry":
+      Jewelry.findById(req.params.id, (err, foundProduct) => {
+        cart.push(foundProduct);
+        totalPrice += parseFloat(foundProduct.price);
+        console.log(totalPrice);
+        res.redirect(`/${req.params.catagory}/${req.params.id}`);
+      });
+      break;
+    case "clothing":
+      Clothing.findById(req.params.id, (err, foundProduct) => {
+        cart.push(foundProduct);
+        totalPrice += parseFloat(foundProduct.price);
+        console.log(totalPrice);
+        res.redirect(`/${req.params.catagory}/${req.params.id}`);
+      });
+      break;
+  }
+});
+
+app.get("/cart", (req, res) => {
+  if (app.locals.login === false) {
+    res.render("Cart", { log: "false", cart: cart, totalPrice: totalPrice });
+  } else {
+    if (app.locals.isAdmin === true) {
+      res.render("Cart", {
+        log: "true",
+        isAdmin: "Admin",
+        cart: cart,
+        totalPrice: totalPrice,
+      });
+    } else {
+      res.render("Cart", {
+        log: "true",
+        isAdmin: "User",
+        cart: cart,
+        totalPrice: totalPrice,
+      });
+    }
+  }
 });
 
 app.get("/seed", (req, res) => {

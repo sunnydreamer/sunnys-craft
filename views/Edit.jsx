@@ -8,7 +8,7 @@ class Edit extends React.Component {
     console.log(product);
 
     return (
-      <DefaultLayoutLog title={"Edit"} isAdmin={isAdmin} cart={cart}>
+      <DefaultLayoutLog title={"Edit"} isAdmin={isAdmin} cart={cart.length}>
         <nav className="gobackBtn" id="backToHome">
           <img
             src="https://cdn-icons-png.flaticon.com/512/32/32766.png"

@@ -12,7 +12,7 @@ class Show extends React.Component {
     if (log === "false") {
       // Strangers Mode
       return (
-        <DefaultLayout title={product.name} cart={cart}>
+        <DefaultLayout title={product.name} cart={cart.length}>
           <ProductContentUser
             seller={product.seller}
             name={product.name}
@@ -20,7 +20,6 @@ class Show extends React.Component {
             img={product.img}
             category={product.category}
             id={product._id}
-            cart={cart}
           ></ProductContentUser>
         </DefaultLayout>
       );
@@ -28,7 +27,11 @@ class Show extends React.Component {
       if (isAdmin === "User") {
         // User Mode
         return (
-          <DefaultLayoutLog title={product.name} isAdmin={isAdmin} cart={cart}>
+          <DefaultLayoutLog
+            title={product.name}
+            isAdmin={isAdmin}
+            cart={cart.length}
+          >
             <ProductContentUser
               seller={product.seller}
               name={product.name}
@@ -42,7 +45,11 @@ class Show extends React.Component {
       } else {
         // Admin Mode
         return (
-          <DefaultLayoutLog title={product.name} isAdmin={isAdmin} cart={cart}>
+          <DefaultLayoutLog
+            title={product.name}
+            isAdmin={isAdmin}
+            cart={cart.length}
+          >
             <ProductContentAdmin
               seller={product.seller}
               name={product.name}

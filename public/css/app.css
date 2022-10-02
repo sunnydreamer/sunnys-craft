@@ -49,7 +49,29 @@ a {
 .signInBtn {
   cursor: pointer;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 120px;
+  padding: 5px;
+  border-radius: 10px;
 }
+
+.signInBtn:hover {
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(234, 234, 234);
+  cursor: pointer;
+}
+
 .signinTitle {
   padding: 20px;
 }
@@ -180,26 +202,27 @@ form .field {
 /* header */
 .topBar {
   /* background-color: green; */
-  padding: 20px 70px;
+  padding: 30px 70px;
   padding-left: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .logoImg {
-  width: 50px;
+  width: 60px;
 }
 
 .brand {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .search {
   /* background-color: yellow; */
-  width: 65%;
+  width: 50%;
   height: 50px;
   display: flex;
+  margin-left: 40px;
 }
 
 .search-bar {
@@ -249,6 +272,21 @@ form .field {
 .cart {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 120px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.cart:hover {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(234, 234, 234);
+  cursor: pointer;
 }
 
 .cartImg {
@@ -517,4 +555,173 @@ form .field {
   color: white;
   border-radius: 30px;
   border: none;
+}
+
+/* cart */
+
+.messageContainer {
+  text-align: center;
+  margin: 50px;
+}
+
+.emptyMessage {
+  font-size: 40px;
+}
+
+.discoverMoreLink {
+  margin: 20px;
+}
+
+.discoverMoreLink a {
+  text-decoration: underline;
+}
+
+.discoverMoreLink a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.cartContent {
+  display: flex;
+  justify-content: center;
+  padding: 0 100px;
+}
+
+.cartItem {
+  display: flex;
+  margin: 30px;
+}
+
+.cartImgContainer {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.cartProductImg {
+  width: 100%;
+}
+
+.cartLeft {
+  width: 70%;
+  /* background-color: #fffbd0; */
+  height: 1000px;
+  border-radius: 20px;
+}
+
+.cartRight {
+  width: 30%;
+  height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgb(34 34 34 / 15%);
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.lineForCart {
+  height: 1px;
+  width: 93%;
+  margin: auto;
+  background-color: lightgray;
+}
+
+.cartProductInfo {
+  /* background-color: red; */
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.cartProductName {
+  font-size: 25px;
+  /* background-color: blue; */
+}
+
+.cartProductPrice {
+  font-size: 20px;
+  /* background-color: green; */
+  padding: 30px;
+}
+.cartBtns {
+  display: flex;
+  width: 180px;
+  justify-content: space-between;
+}
+.cartBtn {
+  text-decoration: underline;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.cartBtn:hover {
+  color: red;
+}
+
+.note {
+  resize: none;
+  padding: 10px;
+  margin-top: 18px;
+  border-radius: 10px;
+}
+
+/* payment */
+.payment p {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.payment label {
+  margin-left: 20px;
+}
+
+.paymentImg {
+  height: 20px;
+  margin-top: 10px;
+}
+
+#paypal {
+  height: 30px;
+  margin-top: 10px;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.shipping {
+  text-decoration: underline;
+}
+
+.shipping:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+#buyBtn {
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  margin-top: 20px;
+}
+
+#buyBtn:hover {
+  background-color: rgb(210, 48, 48);
+}
+
+.tax {
+  margin-top: 10px;
+  text-align: center;
+  color: gray;
 }

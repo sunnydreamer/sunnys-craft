@@ -14,16 +14,24 @@ class Products extends React.Component {
 
     if (log === "false") {
       return (
-        <DefaultLayout title={title} cart={cart}>
+        <DefaultLayout title={title} cart={cart.length}>
           <ProductsContentUser products={products}></ProductsContentUser>
         </DefaultLayout>
       );
     } else {
-      return (
-        <DefaultLayoutLog title={title} isAdmin={isAdmin} cart={cart}>
-          <ProductsContentAdmin products={products}></ProductsContentAdmin>
-        </DefaultLayoutLog>
-      );
+      if (isAdmin === "User") {
+        return (
+          <DefaultLayoutLog title={title} isAdmin={isAdmin} cart={cart.length}>
+            <ProductsContentUser products={products}></ProductsContentUser>
+          </DefaultLayoutLog>
+        );
+      } else {
+        return (
+          <DefaultLayoutLog title={title} isAdmin={isAdmin} cart={cart.length}>
+            <ProductsContentAdmin products={products}></ProductsContentAdmin>
+          </DefaultLayoutLog>
+        );
+      }
     }
   }
 }

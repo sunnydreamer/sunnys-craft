@@ -6,7 +6,11 @@ class New extends React.Component {
     const { catagory } = this.props;
     const { cart } = this.props;
     return (
-      <DefaultLayoutLog title={"Add New Product"} isAdmin="Admin" cart={cart}>
+      <DefaultLayoutLog
+        title={"Add New Product"}
+        isAdmin="Admin"
+        cart={cart.length}
+      >
         <nav className="gobackBtn" id="backToHome">
           <img
             src="https://cdn-icons-png.flaticon.com/512/32/32766.png"
